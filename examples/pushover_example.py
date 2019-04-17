@@ -25,4 +25,4 @@ if is_valid is True:
     )
 
 else:
-    print(res["error"])
+    print(res["errors"])

@@ -16,7 +16,7 @@ def get_long_description():
 
 setup(
     name='pushno',
-    version='0.0.1',
+    version='0.0.1c',
     description='Push Notifications',
     long_description=get_long_description(),
     url='https://github.com/keans/pushno',

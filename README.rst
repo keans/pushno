@@ -116,7 +116,7 @@ Similarly, a message can be sent using PushOver as shown in the following:
         )
 
     else:
-        print(res["error"])
+        print(res["errors"])
 
 Again the validation part of the user's API key is optional.
 

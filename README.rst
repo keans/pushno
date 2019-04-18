@@ -51,6 +51,8 @@ For Prowl do:
 
 ::
 
+    from pushno import PushNotification
+
     pn = PushNotification(
         "prowl", api_key=PUSHNO_PROWL_API_KEY, application="pushno"
     )
@@ -67,6 +69,8 @@ PushOver
 For PushOver do:
 
 ::
+
+    from pushno import PushNotification
 
     pn = PushNotification(
         "pushover", token=PUSHNO_PUSHOVER_API_KEY, user=PUSHNO_PUSHOVER_USER_KEY

@@ -18,6 +18,9 @@ log = logging.getLogger(__name__)
 
 
 class PushOverClient(AbstractClient):
+    """
+    client class to interact with the PushOver API
+    """
     def __init__(self, token, user):
         AbstractClient.__init__(self)
         self._token = token

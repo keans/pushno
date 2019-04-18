@@ -21,6 +21,9 @@ log = logging.getLogger(__name__)
 
 
 class ProwlClient(AbstractClient):
+    """
+    client class to interact with the Prowl API
+    """
     def __init__(self, api_key, provider_key=None):
         AbstractClient.__init__(self)
         self._api_key = api_key
@@ -53,7 +56,7 @@ class ProwlClient(AbstractClient):
 
         return res["code"] == "200", res
 
-    def validate_user(self, device=None):
+    def validate_user(self):
         # prepare validation message
         validation_message = ProwlValidationMessage(
             apikey=self._api_key, providerkey=self._provider_key

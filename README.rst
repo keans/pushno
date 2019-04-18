@@ -25,12 +25,6 @@ or clone/download this repository and install it:
 
 ::
 
-    python3 setup.py install
-
-or
-
-::
-
     python setup.py install
 
 
@@ -45,22 +39,59 @@ and create a corresponding API key that you want to use.
 Examples
 --------
 
-In the following for each service a short example is discussed:
+The easiest way to send a push message with ``pushno`` is to use the
+``PushNotification`` class that provides a common interface to all available
+push notification services.
+
 
 Prowl
 ^^^^^
 
-The easiest way to send a message via Prowl is shown in the following:
+For Prowl do:
 
 ::
 
-    import os
+    pn = PushNotification(
+        "prowl", api_key=PUSHNO_PROWL_API_KEY, application="pushno"
+    )
+    is_valid, res = pn.validate_user()
+    if is_valid:
+        pn.send(event="How simple is that?", description="Great News")
+    else:
+        print(res)
+
+
+PushOver
+^^^^^^^^
+
+For PushOver do:
+
+::
+
+    pn = PushNotification(
+        "pushover", token=PUSHNO_PUSHOVER_API_KEY, user=PUSHNO_PUSHOVER_USER_KEY
+    )
+    is_valid, res = pn.validate_user()
+    if is_valid:
+        pn.send(title="How simple is that?", message="Great News")
+    else:
+        print(res)
+
+Note that the validation part is optional, so if you are sure that the API key
+is working as expected, you can send the push message directly. As a result,
+you can send a push message in two lines of code.
+
+
+It is also possible to use the underlying client classes directly, which
+is however a little bit more verbose:
+
+Prowl
+^^^^^
+
+::
 
     from pushno.plugins import ProwlClient
     from pushno.messages import ProwlMessage
-
-    # get api key and user key from environment variables
-    PUSHNO_PROWL_API_KEY = os.getenv("PUSHNO_PROWL_API_KEY")
 
     # prepare the pushover client
     client = ProwlClient(PUSHNO_PROWL_API_KEY)
@@ -82,24 +113,14 @@ The easiest way to send a message via Prowl is shown in the following:
         print(res)
 
 
-The validation of the user is optional, so if you are sure that the API key
-is working as expected, you can send the message directly.
 
 PushOver
 ^^^^^^^^
 
-Similarly, a message can be sent using PushOver as shown in the following:
-
 ::
-
-    import os
 
     from pushno.plugins import PushOverClient
     from pushno.messages import PushOverMessage
-
-    # get api key and user key from environment variables
-    PUSHNO_PUSHOVER_API_KEY = os.getenv("PUSHNO_PUSHOVER_API_KEY")
-    PUSHNO_PUSHOVER_USER_KEY = os.getenv("PUSHNO_PUSHOVER_USER_KEY")
 
     # prepare the pushover client
     client = PushOverClient(PUSHNO_PUSHOVER_API_KEY, PUSHNO_PUSHOVER_USER_KEY)
@@ -121,7 +142,7 @@ Similarly, a message can be sent using PushOver as shown in the following:
 Again the validation part of the user's API key is optional.
 
 
-For more example scripts see https://github.com/keans/pushno/tree/master/examples .
+For the complete example scripts see https://github.com/keans/pushno/tree/master/examples .
 
 
 Development

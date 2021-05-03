@@ -53,6 +53,8 @@ For Prowl do:
 
     from pushno import PushNotification
 
+    PUSHNO_PROWL_API_KEY = "<your_prowl_api_key>"
+
     pn = PushNotification(
         "prowl", api_key=PUSHNO_PROWL_API_KEY, application="pushno"
     )
@@ -72,8 +74,12 @@ For PushOver do:
 
     from pushno import PushNotification
 
+    PUSHNO_PUSHOVER_API_KEY = "<your_pushover_api_key>"
+    PUSHNO_PUSHOVER_USER_KEY = "<your_pushover_user_key>"
+
     pn = PushNotification(
-        "pushover", token=PUSHNO_PUSHOVER_API_KEY, user=PUSHNO_PUSHOVER_USER_KEY
+        "pushover", token=PUSHNO_PUSHOVER_API_KEY,
+        user=PUSHNO_PUSHOVER_USER_KEY
     )
     is_valid, res = pn.validate_user()
     if is_valid:
@@ -83,7 +89,8 @@ For PushOver do:
 
 Note that the validation part is optional, so if you are sure that the API key
 is working as expected, you can send the push message directly. As a result,
-you can send a push message in two lines of code.
+you can send a push message in two lines of code. The API key is the
+key of the specific app.
 
 
 It is also possible to use the underlying client classes directly, which

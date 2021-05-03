@@ -30,7 +30,7 @@ class ProwlClient(AbstractClient):
         self._provider_key = provider_key
 
     def _parse_result(self, r):
-        root = ET.fromstring(r.text).getchildren()[0]
+        root = list(ET.fromstring(r.text))[0]
         d = root.attrib
         if root.text is not None:
             d["status"] = root.text
